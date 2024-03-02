@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0oty3oi0bj8y"]
+
+[ext_resource type="Script" path="res://Game/Equipment/Stairs/Stairs.gd" id="1_joy2d"]
+[ext_resource type="PackedScene" uid="uid://hsebgraai7gr" path="res://Game/Equipment/Platform/Platform.tscn" id="2_w7tec"]
+[ext_resource type="PackedScene" uid="uid://c3lkk8ttr4bs8" path="res://Game/Equipment/Platform/Point/False.tscn" id="3_tmlws"]
+[ext_resource type="PackedScene" uid="uid://dyqxyhsr8vypl" path="res://Game/Equipment/Platform/Point/True.tscn" id="4_105xr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_80rsp"]
+size = Vector3(2, 0, 4)
+
+[node name="Stairs" type="StaticBody3D"]
+script = ExtResource("1_joy2d")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_80rsp")
+
+[node name="Up" parent="." instance=ExtResource("2_w7tec")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+Place = false
+Move = true
+
+[node name="False" parent="Up" instance=ExtResource("3_tmlws")]
+
+[node name="True" parent="Up" instance=ExtResource("4_105xr")]
+transform = Transform3D(1, 0, 0, 0, 0.893371, -0.449319, 0, 0.449319, 0.893371, 0, 1.5, 0)
+
+[node name="Down" parent="." instance=ExtResource("2_w7tec")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+Place = false
+Move = true
+
+[node name="False" parent="Down" instance=ExtResource("3_tmlws")]
+
+[node name="True" parent="Down" instance=ExtResource("4_105xr")]
+transform = Transform3D(1, 0, 0, 0, 0.893371, -0.449319, 0, 0.449319, 0.893371, 0, 0.5, 0)

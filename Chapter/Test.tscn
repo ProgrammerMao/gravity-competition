@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://cft0lnb8ccuj6"]
+
+[ext_resource type="Script" path="res://Chapter/Default.gd" id="1_6ntf1"]
+[ext_resource type="PackedScene" uid="uid://c5wuy488fjlmv" path="res://Game/LaboratoryScene/Wall/Wall.tscn" id="2_1g5rg"]
+[ext_resource type="PackedScene" uid="uid://ykhjn2wqlv7s" path="res://Game/Equipment/Equipment.tscn" id="5_q8347"]
+[ext_resource type="PackedScene" uid="uid://c7u0eo1bkus73" path="res://Game/Equipment/Button/Button.tscn" id="10_i2qc0"]
+[ext_resource type="PackedScene" uid="uid://hsebgraai7gr" path="res://Game/Equipment/Platform/Platform.tscn" id="12_jcj0d"]
+[ext_resource type="PackedScene" uid="uid://c3lkk8ttr4bs8" path="res://Game/Equipment/Platform/Point/False.tscn" id="13_gecay"]
+[ext_resource type="PackedScene" uid="uid://dyqxyhsr8vypl" path="res://Game/Equipment/Platform/Point/True.tscn" id="14_hrelm"]
+[ext_resource type="PackedScene" uid="uid://bse7lkjog06jo" path="res://Game/Character/Character.tscn" id="16_v5hbn"]
+[ext_resource type="Environment" uid="uid://80rqapt1iyny" path="res://Chapter/Environment.tres" id="17_so0u7"]
+
+[node name="Default" type="Node3D"]
+script = ExtResource("1_6ntf1")
+To_Load = false
+
+[node name="Wall" type="Node3D" parent="."]
+rotation_edit_mode = 1
+
+[node name="Wall17" parent="Wall" instance=ExtResource("2_1g5rg")]
+transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, -2, -1, -6)
+Lattice = false
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="Equipment" type="Node3D" parent="."]
+
+[node name="Equipment2" parent="Equipment" instance=ExtResource("5_q8347")]
+
+[node name="Button" parent="Equipment/Equipment2" instance=ExtResource("10_i2qc0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, -5)
+Switch = true
+
+[node name="Platform" parent="Equipment/Equipment2" instance=ExtResource("12_jcj0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -6)
+Move = true
+
+[node name="False" parent="Equipment/Equipment2/Platform" instance=ExtResource("13_gecay")]
+
+[node name="True" parent="Equipment/Equipment2/Platform" instance=ExtResource("14_hrelm")]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 0)
+
+[node name="Platform2" parent="Equipment/Equipment2" instance=ExtResource("12_jcj0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, -6)
+Move = true
+
+[node name="False" parent="Equipment/Equipment2/Platform2" instance=ExtResource("13_gecay")]
+
+[node name="True" parent="Equipment/Equipment2/Platform2" instance=ExtResource("14_hrelm")]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 0)
+
+[node name="Into" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Equipment" parent="Into" instance=ExtResource("5_q8347")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="Character" parent="Into" instance=ExtResource("16_v5hbn")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -2, 0, -6)
+
+[node name="Load" type="Area3D" parent="Into"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 255
+collision_mask = 255
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("17_so0u7")
+
+[connection signal="area_entered" from="Into/Load" to="." method="_on_load_area_entered"]
+[connection signal="body_entered" from="Into/Load" to="." method="_on_load_body_entered"]

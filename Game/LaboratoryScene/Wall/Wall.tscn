@@ -1,0 +1,195 @@
+[gd_scene load_steps=13 format=3 uid="uid://c5wuy488fjlmv"]
+
+[ext_resource type="Script" path="res://Game/LaboratoryScene/Wall/Wall.gd" id="1_d0fj6"]
+[ext_resource type="Material" uid="uid://chc7d3qm8riok" path="res://Game/LaboratoryScene/Allow.tres" id="2_n37j7"]
+[ext_resource type="Material" uid="uid://cfgi6rh806xo" path="res://Game/LaboratoryScene/Prohibit.tres" id="4_2glfo"]
+[ext_resource type="Texture2D" uid="uid://1lxd3nht7cqp" path="res://Game/LaboratoryScene/Wall/Normal.png" id="4_vh2p2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0lpj8"]
+size = Vector3(1.8, 0.002, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2bnmn"]
+size = Vector3(0.002, 1.8, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pywxo"]
+size = Vector3(0.002, 1.8, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rmxfh"]
+size = Vector3(1.8, 0.002, 0.3)
+
+[sub_resource type="QuadMesh" id="QuadMesh_bhlvf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dhpy5"]
+size = Vector3(0.98, 0.98, 0.005)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xs22"]
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+normal_scale = 4.0
+normal_texture = ExtResource("4_vh2p2")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_35ujr"]
+size = Vector3(2, 2, 0.04)
+
+[node name="Wall" type="StaticBody3D"]
+collision_layer = 17
+collision_mask = 17
+input_ray_pickable = false
+script = ExtResource("1_d0fj6")
+
+[node name="Correct" type="CharacterBody3D" parent="."]
+visible = false
+collision_layer = 16
+collision_mask = 0
+
+[node name="Up" type="CollisionShape3D" parent="Correct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_0lpj8")
+
+[node name="RayCast3D" type="RayCast3D" parent="Correct/Up"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.15)
+exclude_parent = false
+target_position = Vector3(0, 0, 0.3)
+debug_shape_thickness = 5
+
+[node name="Left" type="CollisionShape3D" parent="Correct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+shape = SubResource("BoxShape3D_2bnmn")
+
+[node name="RayCast3D" type="RayCast3D" parent="Correct/Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.15)
+exclude_parent = false
+target_position = Vector3(0, 0, 0.3)
+debug_shape_thickness = 5
+
+[node name="Right" type="CollisionShape3D" parent="Correct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_pywxo")
+
+[node name="RayCast3D" type="RayCast3D" parent="Correct/Right"]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.5, 0, -0.15)
+exclude_parent = false
+target_position = Vector3(0, 0, 0.3)
+debug_shape_thickness = 5
+
+[node name="Down" type="CollisionShape3D" parent="Correct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_rmxfh")
+
+[node name="RayCast3D" type="RayCast3D" parent="Correct/Down"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.15)
+exclude_parent = false
+target_position = Vector3(0, 0, 0.3)
+debug_shape_thickness = 5
+
+[node name="Wall" type="Node3D" parent="."]
+
+[node name="Allow" type="Node3D" parent="Wall"]
+
+[node name="Lattice" type="Node3D" parent="Wall/Allow"]
+
+[node name="1" type="MeshInstance3D" parent="Wall/Allow/Lattice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0)
+mesh = SubResource("QuadMesh_bhlvf")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("2_n37j7")
+
+[node name="2" type="MeshInstance3D" parent="Wall/Allow/Lattice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0)
+mesh = SubResource("QuadMesh_bhlvf")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("2_n37j7")
+
+[node name="3" type="MeshInstance3D" parent="Wall/Allow/Lattice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0)
+mesh = SubResource("QuadMesh_bhlvf")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("2_n37j7")
+
+[node name="4" type="MeshInstance3D" parent="Wall/Allow/Lattice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, 0)
+mesh = SubResource("QuadMesh_bhlvf")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("2_n37j7")
+
+[node name="Allow" type="MeshInstance3D" parent="Wall/Allow"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+visible = false
+mesh = SubResource("QuadMesh_bhlvf")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("2_n37j7")
+
+[node name="Prohibit" type="Node3D" parent="Wall"]
+visible = false
+
+[node name="Lattice" type="Node3D" parent="Wall/Prohibit"]
+
+[node name="1" type="MeshInstance3D" parent="Wall/Prohibit/Lattice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0)
+mesh = SubResource("QuadMesh_bhlvf")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("4_2glfo")
+
+[node name="Mesh" type="MeshInstance3D" parent="Wall/Prohibit/Lattice/1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.003)
+visible = false
+mesh = SubResource("BoxMesh_dhpy5")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xs22")
+
+[node name="2" type="MeshInstance3D" parent="Wall/Prohibit/Lattice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0)
+mesh = SubResource("QuadMesh_bhlvf")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("4_2glfo")
+
+[node name="Mesh" type="MeshInstance3D" parent="Wall/Prohibit/Lattice/2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.003)
+visible = false
+mesh = SubResource("BoxMesh_dhpy5")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xs22")
+
+[node name="3" type="MeshInstance3D" parent="Wall/Prohibit/Lattice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0)
+mesh = SubResource("QuadMesh_bhlvf")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("4_2glfo")
+
+[node name="Mesh" type="MeshInstance3D" parent="Wall/Prohibit/Lattice/3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.003)
+visible = false
+mesh = SubResource("BoxMesh_dhpy5")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xs22")
+
+[node name="4" type="MeshInstance3D" parent="Wall/Prohibit/Lattice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, 0)
+mesh = SubResource("QuadMesh_bhlvf")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("4_2glfo")
+
+[node name="Mesh" type="MeshInstance3D" parent="Wall/Prohibit/Lattice/4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.003)
+visible = false
+mesh = SubResource("BoxMesh_dhpy5")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xs22")
+
+[node name="Prohibit" type="MeshInstance3D" parent="Wall/Prohibit"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+visible = false
+mesh = SubResource("QuadMesh_bhlvf")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("4_2glfo")
+
+[node name="Mesh" type="MeshInstance3D" parent="Wall/Prohibit/Prohibit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.003)
+visible = false
+mesh = SubResource("BoxMesh_dhpy5")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xs22")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.02)
+shape = SubResource("BoxShape3D_35ujr")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

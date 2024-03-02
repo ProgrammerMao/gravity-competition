@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dn5k7ynqom7do"]
+
+[ext_resource type="Script" path="res://Music/Music.gd" id="1_g3sfq"]
+[ext_resource type="AudioStream" uid="uid://duxrwpdn2pr5n" path="res://Music/Bass1.wav" id="2_deeul"]
+[ext_resource type="AudioStream" uid="uid://25jnp0c6u8b" path="res://Music/Bass2.wav" id="3_kc3pa"]
+[ext_resource type="AudioStream" uid="uid://cte5a2kqgumh0" path="res://Music/Drum.wav" id="4_7lcwf"]
+[ext_resource type="AudioStream" uid="uid://c48m073qo8vam" path="res://Music/Harmony.wav" id="5_rdexy"]
+[ext_resource type="AudioStream" uid="uid://bxv8wxokkp3cc" path="res://Music/Melody.wav" id="6_inpw3"]
+
+[node name="Music" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g3sfq")
+
+[node name="Bass1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_deeul")
+volume_db = -80.0
+bus = &"Music"
+
+[node name="Bass2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_kc3pa")
+volume_db = -80.0
+bus = &"Music"
+
+[node name="Drum" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_7lcwf")
+volume_db = -80.0
+bus = &"Music"
+
+[node name="Harmony" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_rdexy")
+volume_db = -80.0
+bus = &"Music"
+
+[node name="Melody" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_inpw3")
+volume_db = -80.0
+bus = &"Music"

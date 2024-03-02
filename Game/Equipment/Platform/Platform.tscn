@@ -1,0 +1,196 @@
+[gd_scene load_steps=18 format=3 uid="uid://hsebgraai7gr"]
+
+[ext_resource type="Script" path="res://Game/Equipment/Platform/Platform.gd" id="1_hlxrn"]
+[ext_resource type="PackedScene" uid="uid://xtshmleocdey" path="res://Game/LaboratoryScene/ToCore/ToCore.tscn" id="3_cn27j"]
+[ext_resource type="PackedScene" uid="uid://c5wuy488fjlmv" path="res://Game/LaboratoryScene/Wall/Wall.tscn" id="3_wbtys"]
+[ext_resource type="PackedScene" uid="uid://bb0yqcvwhgsgr" path="res://Game/LaboratoryScene/Prohibit/Prohibit.tscn" id="4_bgkky"]
+[ext_resource type="Material" uid="uid://dweoe666vtw02" path="res://Game/Equipment/Platform/Side/Prohibit.tres" id="6_j18nl"]
+[ext_resource type="Material" uid="uid://bnyop43nfj8bg" path="res://Game/Equipment/Platform/Side/Allow.tres" id="6_jbamp"]
+[ext_resource type="Texture2D" uid="uid://bm2glbs6htysr" path="res://Game/Equipment/Platform/Base/Material.png" id="7_yhoxl"]
+[ext_resource type="Texture2D" uid="uid://lvurwpjh82c3" path="res://Game/Equipment/Platform/Base/Normal.png" id="8_cgv4k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_41i18"]
+size = Vector3(2, 0.1, 2)
+
+[sub_resource type="QuadMesh" id="QuadMesh_mqdyv"]
+size = Vector2(2, 0.1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_j7gwf"]
+size = Vector2(2, 0.1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_4ouo1"]
+size = Vector2(2, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cryuy"]
+albedo_texture = ExtResource("7_yhoxl")
+normal_enabled = true
+normal_scale = 8.0
+normal_texture = ExtResource("8_cgv4k")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7m4ae"]
+size = Vector3(1.8, 0.002, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tddxf"]
+size = Vector3(0.002, 1.8, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_asqc2"]
+size = Vector3(0.002, 1.8, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ok4x"]
+size = Vector3(1.8, 0.002, 0.4)
+
+[node name="Platform" type="StaticBody3D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_hlxrn")
+
+[node name="Wall_Up" parent="." instance=ExtResource("3_wbtys")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.05, 0)
+
+[node name="Wall_Down" parent="." instance=ExtResource("3_wbtys")]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, -0.05, 0)
+
+[node name="ToCore_UP" parent="." instance=ExtResource("3_cn27j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="ToCore_Down" parent="." instance=ExtResource("3_cn27j")]
+transform = Transform3D(-1, 1.50996e-07, 9.31761e-22, -1.50996e-07, -1, -1.06581e-14, -6.77568e-22, -1.06581e-14, 1, 0, -0.05, 0)
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+top_level = true
+shape = SubResource("BoxShape3D_41i18")
+
+[node name="Prohibit" type="Node3D" parent="."]
+
+[node name="Prohibit_N_X" parent="Prohibit" instance=ExtResource("4_bgkky")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05, 0, 0)
+
+[node name="Prohibit_P_X" parent="Prohibit" instance=ExtResource("4_bgkky")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, 0)
+
+[node name="Prohibit_P_Z" parent="Prohibit" instance=ExtResource("4_bgkky")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 1.05)
+
+[node name="Prohibit_N_Z" parent="Prohibit" instance=ExtResource("4_bgkky")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -1.05)
+
+[node name="Mesh" type="Node3D" parent="."]
+
+[node name="True" type="Node3D" parent="Mesh"]
+
+[node name="1" type="MeshInstance3D" parent="Mesh/True"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+mesh = SubResource("QuadMesh_mqdyv")
+surface_material_override/0 = ExtResource("6_jbamp")
+
+[node name="2" type="MeshInstance3D" parent="Mesh/True"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1)
+mesh = SubResource("QuadMesh_mqdyv")
+surface_material_override/0 = ExtResource("6_jbamp")
+
+[node name="3" type="MeshInstance3D" parent="Mesh/True"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 0, 0)
+mesh = SubResource("QuadMesh_mqdyv")
+surface_material_override/0 = ExtResource("6_jbamp")
+
+[node name="4" type="MeshInstance3D" parent="Mesh/True"]
+transform = Transform3D(1.19209e-07, 0, -1, 0, 1, 0, 1, 0, 1.19209e-07, -1, 0, 0)
+mesh = SubResource("QuadMesh_mqdyv")
+surface_material_override/0 = ExtResource("6_jbamp")
+
+[node name="False" type="Node3D" parent="Mesh"]
+visible = false
+
+[node name="1" type="MeshInstance3D" parent="Mesh/False"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+mesh = SubResource("QuadMesh_j7gwf")
+surface_material_override/0 = ExtResource("6_j18nl")
+
+[node name="2" type="MeshInstance3D" parent="Mesh/False"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1)
+mesh = SubResource("QuadMesh_j7gwf")
+surface_material_override/0 = ExtResource("6_j18nl")
+
+[node name="3" type="MeshInstance3D" parent="Mesh/False"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 0, 0)
+mesh = SubResource("QuadMesh_j7gwf")
+surface_material_override/0 = ExtResource("6_j18nl")
+
+[node name="4" type="MeshInstance3D" parent="Mesh/False"]
+transform = Transform3D(1.19209e-07, 0, -1, 0, 1, 0, 1, 0, 1.19209e-07, -1, 0, 0)
+mesh = SubResource("QuadMesh_j7gwf")
+surface_material_override/0 = ExtResource("6_j18nl")
+
+[node name="Chassis" type="Node3D" parent="."]
+top_level = true
+visible = false
+
+[node name="Wall_Chassis" parent="Chassis" instance=ExtResource("3_wbtys")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.05, 0)
+Place = false
+Lattice = false
+
+[node name="1" type="MeshInstance3D" parent="Chassis"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.025, -1)
+mesh = SubResource("QuadMesh_4ouo1")
+surface_material_override/0 = SubResource("StandardMaterial3D_cryuy")
+
+[node name="2" type="MeshInstance3D" parent="Chassis"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.025, 1)
+mesh = SubResource("QuadMesh_4ouo1")
+surface_material_override/0 = SubResource("StandardMaterial3D_cryuy")
+
+[node name="3" type="MeshInstance3D" parent="Chassis"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, -0.025, 0)
+mesh = SubResource("QuadMesh_4ouo1")
+surface_material_override/0 = SubResource("StandardMaterial3D_cryuy")
+
+[node name="4" type="MeshInstance3D" parent="Chassis"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 1, -0.025, 0)
+mesh = SubResource("QuadMesh_4ouo1")
+surface_material_override/0 = SubResource("StandardMaterial3D_cryuy")
+
+[node name="PlatformCorrect" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+collision_layer = 16
+collision_mask = 0
+
+[node name="Up" type="CollisionShape3D" parent="PlatformCorrect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_7m4ae")
+
+[node name="RayCast3D" type="RayCast3D" parent="PlatformCorrect/Up"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+exclude_parent = false
+target_position = Vector3(0, 0, 0.1)
+debug_shape_thickness = 5
+
+[node name="Left" type="CollisionShape3D" parent="PlatformCorrect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+shape = SubResource("BoxShape3D_tddxf")
+
+[node name="RayCast3D" type="RayCast3D" parent="PlatformCorrect/Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+exclude_parent = false
+target_position = Vector3(0, 0, 0.1)
+debug_shape_thickness = 5
+
+[node name="Right" type="CollisionShape3D" parent="PlatformCorrect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_asqc2")
+
+[node name="RayCast3D" type="RayCast3D" parent="PlatformCorrect/Right"]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 1, 0, 0)
+exclude_parent = false
+target_position = Vector3(0, 0, 0.1)
+debug_shape_thickness = 5
+
+[node name="Down" type="CollisionShape3D" parent="PlatformCorrect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_3ok4x")
+
+[node name="RayCast3D" type="RayCast3D" parent="PlatformCorrect/Down"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+exclude_parent = false
+target_position = Vector3(0, 0, 0.1)
+debug_shape_thickness = 5

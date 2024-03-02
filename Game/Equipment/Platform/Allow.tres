@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cwru1r4d5x1k5"]
+
+[ext_resource type="Texture2D" uid="uid://dx0dc0cr2keyx" path="res://Game/LaboratoryScene/Wall/Allow.png" id="1_5cmw1"]
+[ext_resource type="Texture2D" uid="uid://1lxd3nht7cqp" path="res://Game/LaboratoryScene/Wall/Normal.png" id="2_77gis"]
+
+[resource]
+albedo_texture = ExtResource("1_5cmw1")
+metallic_specular = 0.0
+roughness = 0.25
+normal_enabled = true
+normal_scale = 0.25
+normal_texture = ExtResource("2_77gis")

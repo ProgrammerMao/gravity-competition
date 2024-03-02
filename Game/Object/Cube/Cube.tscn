@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkoi6tf1sb2jm"]
+
+[ext_resource type="Script" path="res://Game/Object/Object.gd" id="1_3nfdn"]
+[ext_resource type="Material" uid="uid://cvriw067hk471" path="res://Game/Object/Cube/Pros.tres" id="2_1q30w"]
+[ext_resource type="PackedScene" uid="uid://duee8ff7t5rmg" path="res://Game/Object/Cube/Cube.glb" id="2_xwoq7"]
+[ext_resource type="Material" uid="uid://b73w3143qywu8" path="res://Game/Object/Cube/Cons.tres" id="3_eo0xd"]
+[ext_resource type="AudioStream" uid="uid://cperb0y5umylv" path="res://Game/Object/Cube/Collide.wav" id="5_upuke"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_au5ui"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3vewd"]
+size = Vector3(0.6, 0.6, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_b0wry"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="Cube" type="RigidBody3D"]
+collision_layer = 65
+collision_mask = 65
+physics_material_override = SubResource("PhysicsMaterial_au5ui")
+gravity_scale = 0.0
+max_contacts_reported = 4
+contact_monitor = true
+angular_damp_mode = 1
+script = ExtResource("1_3nfdn")
+
+[node name="Light" type="OmniLight3D" parent="."]
+light_energy = 0.5
+omni_range = 1.5
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_3vewd")
+
+[node name="Model" parent="." instance=ExtResource("2_xwoq7")]
+
+[node name="Reversal" type="Node3D" parent="."]
+
+[node name="False" type="MeshInstance3D" parent="Reversal"]
+mesh = SubResource("BoxMesh_b0wry")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_1q30w")
+
+[node name="True" type="MeshInstance3D" parent="Reversal"]
+visible = false
+mesh = SubResource("BoxMesh_b0wry")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_eo0xd")
+
+[node name="Collide" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_upuke")
+volume_db = -25.0
+max_distance = 50.0
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

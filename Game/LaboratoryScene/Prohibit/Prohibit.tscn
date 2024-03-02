@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb0yqcvwhgsgr"]
+
+[sub_resource type="GDScript" id="GDScript_6v5w2"]
+script/source = "extends StaticBody3D
+
+var attribute = \"Wall\"
+
+var Place = false
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yxl8u"]
+size = Vector3(0.1, 0.1, 2)
+
+[node name="Prohibit" type="StaticBody3D"]
+script = SubResource("GDScript_6v5w2")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_yxl8u")

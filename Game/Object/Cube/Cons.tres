@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b73w3143qywu8"]
+
+[resource]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.95)
+roughness = 0.0
+emission_energy_multiplier = 0.04
+rim = 0.03
+clearcoat = 0.75
+clearcoat_roughness = 0.27
+heightmap_scale = 5.823
+refraction_scale = -0.05
+refraction_texture_channel = 3

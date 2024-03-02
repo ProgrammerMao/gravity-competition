@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6sln06xha1gl"]
+
+[ext_resource type="Script" path="res://Game/Equipment/Area/Area.gd" id="1_3diod"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fwrgc"]
+size = Vector3(2, 2, 2)
+
+[node name="Area" type="Area3D"]
+top_level = true
+script = ExtResource("1_3diod")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fwrgc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

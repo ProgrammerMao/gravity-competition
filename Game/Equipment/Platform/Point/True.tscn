@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://dyqxyhsr8vypl"]
+
+[node name="True" type="Marker3D"]
+top_level = true

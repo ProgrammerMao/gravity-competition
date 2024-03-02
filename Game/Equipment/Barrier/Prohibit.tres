@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dgicl5kdv164w"]
+
+[ext_resource type="Texture2D" uid="uid://6wbbna5eofp0" path="res://Game/Equipment/Barrier/Barrier.png" id="1_gy75q"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 0, 0, 0.35)
+albedo_texture = ExtResource("1_gy75q")
+metallic_specular = 0.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 0.01
